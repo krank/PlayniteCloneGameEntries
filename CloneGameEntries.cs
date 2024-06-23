@@ -31,9 +31,13 @@ namespace CloneGameEntries
 
     public override IEnumerable<GameMenuItem> GetGameMenuItems(GetGameMenuItemsArgs args)
     {
+      string cloneMenuItemDesc = args.Games.Count > 1 ?
+        string.Format(ResourceProvider.GetString("LOCCloneGameEntryMakeCloneOfMulti"), args.Games.Count) :
+        ResourceProvider.GetString("LOCCloneGameEntryMakeCloneOfSingle");
+
       yield return new GameMenuItem
       {
-        Description = $"Make clone of {args.Games.Count} entries",
+        Description = cloneMenuItemDesc,
         Action = (gameArgs) =>
         {
           foreach (Game game in args.Games)
